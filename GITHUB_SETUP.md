@@ -26,5 +26,12 @@ I have created the necessary files for a GitHub repository:
     git push -u origin main
     ```
 
+4.  **Tag Version 1.0.0**
+    To mark this point in history as version 1.0.0:
+    ```bash
+    git tag v1.0.0
+    git push origin v1.0.0
+    ```
+
 ## CI/CD
 Once pushed, click the "Actions" tab on your GitHub repository page. You should see a workflow running that builds your project and runs the tests.
