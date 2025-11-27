@@ -60,6 +60,10 @@ export class ByteFlags {
         return this.byte;
     }
 
+    reset(): void {
+        this.byte = 0;
+    }
+
     toJSON(): Record<string, boolean> {
         const result: Record<string, boolean> = {};
         for (const flagName of Object.keys(this.map)) {
@@ -71,26 +75,11 @@ export class ByteFlags {
     fromJSON(data: Record<string, boolean>): void {
         for (const [flagName, isEnabled] of Object.entries(data)) {
             if (this.map[flagName] === undefined) {
-                // Optionally ignore or throw. Requirement says "Throw errors for missing flag names" but that might be for direct calls.
-                // For fromJSON, usually we only process known keys.
-                // However, to be safe and consistent with "Throw errors for missing flag names", let's check.
-                // But usually fromJSON might receive partial updates?
-                // The requirement says "fromJSON(data: Record<string, boolean>): void".
-                // Let's assume it sets the state based on the input.
-                // If a key in data is NOT in map, it should probably throw or be ignored.
-                // Let's stick to strict validation as per "Throw errors for missing flag names".
                 if (this.map[flagName] === undefined) {
                     throw new Error(`Flag '${flagName}' is not defined in the mapping.`);
                 }
             }
         }
-
-        // Reset byte or just update? "fromJSON" usually implies setting state.
-        // Let's assume we update the flags present in data.
-        // Or should we reset first?
-        // Given it's a utility to pack settings, usually you'd want to load a full state.
-        // But if partial, maybe just update.
-        // Let's implement it as: update flags present in data.
 
         for (const [flagName, isEnabled] of Object.entries(data)) {
             if (isEnabled) {

@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.0] - 2024-11-28
+
+### Added
+- `reset()` method to clear all flags.
+- `files` whitelist in `package.json` for cleaner NPM package.
+
 ## [1.0.0] - 2024-11-28
 
 ### Added

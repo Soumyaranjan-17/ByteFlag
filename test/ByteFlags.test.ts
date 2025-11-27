@@ -111,4 +111,11 @@ describe('ByteFlags', () => {
         flags.setByte(255);
         expect(flags.toHex()).toBe('0xFF');
     });
+
+    it('should reset all flags', () => {
+        const flags = new ByteFlags(flagsMap, 255);
+        flags.reset();
+        expect(flags.getByte()).toBe(0);
+        expect(flags.isEnabled('flag0')).toBe(false);
+    });
 });
